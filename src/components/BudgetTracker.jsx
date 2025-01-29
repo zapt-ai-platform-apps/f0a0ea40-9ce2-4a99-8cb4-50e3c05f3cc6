@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
+import { addTransaction, calculateTotals } from './BudgetTrackerUtils';
 
 export default function BudgetTracker() {
   const [transactions, setTransactions] = useState([]);
   const [newTransaction, setNewTransaction] = useState({ type: 'income', amount: '', description: '' });
 
-  const addTransaction = () => {
-    if (newTransaction.amount && newTransaction.description) {
-      setTransactions([级...transactions, { id: Date.now(), ...newTransaction }]);
-      setNewTransaction({ type: 'income', amount: '', description: '' });
-    }
-  };
+  const { totalIncome, totalExpenses } = calculateTotals(transactions);
 
-  const totalIncome = transactions
-    .filter((t) => t.type === 'income')
-    .reduce((sum, t) => sum + Number(t.amount), 0);
-  
-  const totalExpenses = transactions
-    .filter((t) => t.type === 'expense')
-    .reduce((sum, t) => sum + Number(t.amount), 0);
+  const handleAddTransaction = () => {
+    const updatedTransactions = addTransaction(transactions, newTransaction);
+    setTransactions(updatedTransactions);
+    setNewTransaction({ type: 'income', amount: '', description: '' });
+  };
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Budget Tracking</h极2>
+      <h2 className="text-2xl font-bold mb-4">Budget Tracking</h2>
       <div className="flex gap-2 justify-between mb-4">
         <div className="bg-green-50 p-4 rounded-lg w-full">
           <p className="text-gray-600">Income</p>
@@ -50,13 +44,13 @@ export default function BudgetTracker() {
         />
         <input
           type="text"
-          value极={newTransaction.description}
+          value={newTransaction.description}
           onChange={(e) => setNewTransaction({ ...newTransaction, description: e.target.value })}
           className="box-border border p-2 rounded"
           placeholder="Description"
         />
         <button
-          onClick={addTransaction}
+          onClick={handleAddTransaction}
           className="bg-pink-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-pink-600"
         >
           Add Transaction

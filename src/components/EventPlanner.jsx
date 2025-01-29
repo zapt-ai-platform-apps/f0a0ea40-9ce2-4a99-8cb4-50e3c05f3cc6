@@ -12,7 +12,7 @@ export default function EventPlanner() {
   };
 
   return (
-   极<div>
+    <div>
       <h2 className="text-2xl font-bold mb-4">Event Planning</h2>
       <div className="grid gap-4 mb-4">
         <input
@@ -40,7 +40,7 @@ export default function EventPlanner() {
           <li key={event.id} className="flex justify-between items-center p-2 border rounded">
             <div>
               <p className="font-medium">{event.title}</p>
-              <p className="text-sm text-gray-500">{event.date}</极p>
+              <p className="text-sm text-gray-500">{event.date}</p>
             </div>
             <button
               className="text-red-500 hover:text-red-700 cursor-pointer"

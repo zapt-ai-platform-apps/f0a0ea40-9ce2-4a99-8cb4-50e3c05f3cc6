@@ -14,7 +14,7 @@ export default function TaskManager() {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Task Management</h2>
-      <div className="flex gap极2 mb-4">
+      <div className="flex gap-2 mb-4">
         <input
           type="text"
           value={newTask}
@@ -34,7 +34,7 @@ export default function TaskManager() {
           <li key={task.id} className="flex justify-between items-center p-2 border rounded">
             <span>{task.text}</span>
             <button
-              className极"text-red-500 hover:text-red-700 cursor-pointer"
+              className="text-red-500 hover:text-red-700 cursor-pointer"
               onClick={() => setTasks(tasks.filter((t) => t.id !== task.id))}
             >
               Remove
